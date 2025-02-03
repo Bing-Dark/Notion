@@ -87,49 +87,43 @@ body{
 <body>
     
 <div id="timer">
-
     <div class="days"> 
-        <div id="days" class="numbers "> </div>days</div> 
-      <div class="hours"> 
-        <div  id="hours" class="numbers"> </div>hours</div> 
-      <div class="minutes"> 
-        <div  id="minutes" class="numbers"> </div>minutes</div> 
-      <div   class="seconds"> 
-        <div id="seconds" class="numbers"> </div>seconds</div> 
-      </div>
+    <div id="days" class="numbers "> </div>days</div> 
+    <div class="hours"> 
+    <div  id="hours" class="numbers"> </div>hours</div> 
+    <div class="minutes"> 
+    <div  id="minutes" class="numbers"> </div>minutes</div> 
+    <div   class="seconds"> 
+    <div id="seconds" class="numbers"> </div>seconds</div> 
+</div>
 
 </div>
 
 </body>
 <script>
-    const year = new Date().getFullYear();
-//const myDate = new Date('Oct 15, 2024 00:00:00');
-const myDate = new Date().getDate() + 1;
-console.log(myDate);
+
+const today = new Date();
+const tomorrow = new Date();
+tomorrow.setDate(today.getDate() + 1);
 
 // countdown
 let timer = setInterval(function() {
 
-  // get today's date
-  const today = new Date().getTime();
+    // get today's date
+    const today = new Date().getTime();
+    const diff = new Date(tomorrow.toString().substring(4, 16) + '00:00:00') - today;
 
-  // get the difference
-  //const diff = myDate - today;
-    const diff = today - myDate;
+    // math
+    let days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    let hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    let minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    let seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
-  // math
-  let days = Math.floor(diff / (1000 * 60 * 60 * 24));
-  let hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  let minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-  let seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-  // display
-  document.getElementById("days").innerHTML=days
-  document.getElementById("hours").innerHTML=hours
-  document.getElementById("minutes").innerHTML=minutes
-  document.getElementById("seconds").innerHTML=seconds
-
-
+    // display
+    document.getElementById("days").innerHTML=days
+    document.getElementById("hours").innerHTML=hours
+    document.getElementById("minutes").innerHTML=minutes
+    document.getElementById("seconds").innerHTML=seconds
 
 }, 1);
 </script>
